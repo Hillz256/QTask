@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Best African">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <meta name="keywords" content="Online survey, quiz, paid survey">
+   <title>3Kei Poems</title>
+
+   <link rel="stylesheet" href="{% static 'quikTasks/css/bootstrap.min.css' %}">
+   <link rel="stylesheet" href="{% static 'quikTasks/css/main.css' %}">
+   <link rel="stylesheet" href="{% static 'quikTasks/css/profile.css' %}">
+   <link rel="stylesheet" href="{% static 'quikTasks/fontawesome/css/all.css' %}">
+
+</head>
+
+<body>
+
+   <!-- NAVBAR -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+         <a class="navbar-brand" href="{% url 'task' %}">
+            <img class="rounded-circle" src="{% static 'quikTasks/images/logo.png' %}" width="125"
+               alt="3kei poems logo">
+         </a>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            arial-controls="navbarSupportedContent" arial-expanded="false" aria-label="Toggle Navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class="nav-item active">
+                  <a href="{% url 'task' %}" class="nav-link" aria-current="page">
+                     Poems
+                  </a>
+               </li>
+               <li class="nav-item"><a href="#" class="nav-link">Feedback</a></li>
+               <li class="nav-item"><a href="#" class="nav-link">Support</a></li>
+            </ul>
+
+            <div class="d-flex my-2 my-lg-0">
+               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  {% if user.is_authenticated %}
+                  <li class="nav-item"><a href="{% url 'create' %}" class="nav-link">New Poem</a></li>
+                  <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+                  <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                  {% else %}
+                  <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                  <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Sign Up</a></li>
+                  {% endif %}
+               </ul>
+            </div>
+         </div>
+      </div>
+
+   </nav>
+   <!--END NAVBAR -->
+
+   {% if messages %}
+   {% for message in messages %}
+
+   <div class="alert alert-{{ message.tags }}">
+      <div class="container">
+         {{message}}
+      </div>
+   </div>
+   {% endfor %}
+   {% endif %}
+   {% block content %}
+   {% endblock content %}
+
+   <script src="{% static 'quikTasks/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

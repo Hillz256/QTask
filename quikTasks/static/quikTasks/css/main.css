@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: monospace, Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #383838;
+  color: #fff !important;
+}
+
+a {
+  color: #885fee !important;
+}
+
+/*  PROFILE PAGE */
+
+input {
+  margin: 5px 0 5px 0;
+  width: 60%;
+  font-family: monospace, Arial, Helvetica, sans-serif !important;
+}
+
+#intro {
+  min-height: 40vh;
+  background-image: url("../images/bg.jpg");
+}
+
+#intro-header {
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  min-height: 40vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+#intro h1 {
+  text-align: center;
+}
+
+/* Poem section */
+
+.poem-section {
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: -2px -3px 4px 0 rgba(0, 0, 0, 0.2),
+    2px 3px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+#poet {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.avatar {
+  margin: 5px;
+}
+
+.avatar img {
+  width: 80px;
+  height: 80px;
+}
+
+.poet-info {
+  margin: 5px 0;
+}
+
+#paginate {
+  margin: auto;
+}
+
+.poet-header {
+  display: grid;
+  place-items: center;
+  min-height: 10vh;
+  padding: 20px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: row;
+}
+
+.like {
+  margin: 0 10px;
+}

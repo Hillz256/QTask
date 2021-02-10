@@ -1,0 +1,12 @@
+{% extends 'quikTasks/layout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+   <h3>You are logged out</h3>
+   <div class="border-top pt-3">
+      <small class="text-muted">
+         <a href="{% url 'login' %}">Log In again</a>
+      </small>
+   </div>
+</div>
+{% endblock content %}

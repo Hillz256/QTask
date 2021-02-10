@@ -1,0 +1,21 @@
+{% extends 'quikTasks/layout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+   <form method="POST">
+      {% csrf_token %}
+      <fieldset class="form-group">
+         <legend class="border-bottom mb-3">
+            Create new Poem!
+         </legend>
+         {{form|crispy}}
+      </fieldset>
+      <div class="form-group pt-2">
+         <button type="submit" class="btn btn-primary btn-lg">
+            Post
+         </button>
+      </div>
+   </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,81 @@
+{% extends 'quikTasks/layout.html' %}
+
+{% block content %}
+{% if poems_list %}
+<div class="container">
+   <section class="poet-header">
+      <h3>{{view.kwargs.first_name}} {{ view.kwargs.last_name }}</h3>
+      <h2>Poems by {{view.kwargs.username}} ({{page_obj.paginator.count}})</h2>
+   </section>
+
+   <div class="row">
+      <div class="col-md-8">
+         {% for poem in poems_list %}
+         <article class="poem-section">
+            <a href="{% url 'detail' poem.id %}">
+               <h3 class="my-2">
+                  {{ poem.title }}
+               </h3>
+            </a>
+            <legend class="border-bottom" style="width: 80%;"></legend>
+
+            <p>{{poem.description}}</p>
+         </article>
+
+         {% endfor %}
+
+
+         {% if is_paginated %}
+
+
+         {% if page_obj.has_previous %}
+         <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+         <a class="btn btn-outline-info mb-4" href="?page={{page_obj.previous_page_number}}">Prev</a>
+         {% endif %}
+
+
+         {% for num in page_obj.paginator.page_range %}
+
+         {% if page_obj.number == num %}
+         <a class="btn btn-info mb-4" href="?page={{ num }}">{{num}}</a>
+         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a
+            class="btn btn-outline-info mb-4" href="?page={{ num }}">{{num}}</a>
+            {% endif %}
+
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}}">Next</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+
+            {% endif %}
+      </div>
+
+      <div class="col-md-4">
+         <h4>Poems by Title</h4>
+         <ul>
+            {% for poem in poems_list %}
+            <li class="my-2">
+               <a href="{% url 'detail' poem.id %}">
+                  {{ poem.title }}
+               </a>
+            </li>
+            {% endfor %}
+         </ul>
+      </div>
+   </div>
+</div>
+{% else %}
+<div class="container">
+   <article class="text-center my-2"></article>
+   <p class="lead">
+      There are no open Tasks at the moment.
+   </p>
+   <p class="text-muted">
+      Please check back later!
+   </p>
+</div>
+{% endif %}
+
+{% endblock content %}

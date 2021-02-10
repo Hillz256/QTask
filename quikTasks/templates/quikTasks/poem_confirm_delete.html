@@ -1,0 +1,25 @@
+{% extends 'quikTasks/layout.html' %}
+{% block content %}
+<div class="container">
+   <form method="POST">
+      {% csrf_token %}
+      <fieldset class="form-group">
+         <legend class="border-bottom mb-3">
+            Delete Task!
+         </legend>
+         <h2>
+            Confirm delete {{ object.title}}
+         </h2>
+      </fieldset>
+      <div class="form-group pt-2">
+         <button type="submit" class="btn btn-danger btn-lg">
+            Delete
+         </button>
+         <a href="{% url 'detail' object.id %}" class="btn btn-secondary btn-lg">
+            Cancel
+         </a>
+      </div>
+   </form>
+</div>
+
+{% endblock content %}

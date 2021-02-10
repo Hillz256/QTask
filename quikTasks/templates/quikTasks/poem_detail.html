@@ -1,0 +1,45 @@
+{% extends 'quikTasks/layout.html' %}
+
+{% block content %}
+<div class="container">
+   <div class="row my-3">
+      <div class="col-12">
+         <div class="poem-section">
+            <div>
+               {% if poem.author == user %}
+               <section>
+                  <h1 class="text-uppercase">{{poem.author.first_name}} {{poem.author.last_name}}</h1>
+                  <small class="text-muted">@{{poem.author.username}}</small>
+                  <p class="text-muted">{{poem.date_created}}</p>
+               </section>
+               <section class="mb-2">
+                  <a class="btn btn-outline-info btn-sm" href="{% url 'poem-update' poem.id %}">Update</a>
+                  <a class="btn btn-outline-danger btn-sm" href="{% url 'poem-delete' poem.id %}">Delete</a>
+               </section>
+
+               {% else %}
+               <a href="{% url 'user-poems' poem.author.username %}">
+                  <h1 class="text-uppercase">{{poem.author.first_name}} {{poem.author.last_name}}</h1>
+                  <small class="text-muted">@{{poem.author.username}}</small>
+                  <p class="text-muted">{{poem.date_created}}</p>
+               </a>
+               {% endif %}
+            </div>
+            <legend class="border-bottom" style="width: 80%;"></legend>
+            <h3>{{poem.title}}</h3>
+            <p>{{poem.description}}</p>
+            <hr>
+            <div class="comment">
+               <div class="like">
+                  <button class="btn btn-outline-light">Like</button>
+               </div>
+               <div class="like">
+                  <button class="btn btn-outline-light">Comment</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,124 @@
+{% extends 'quikTasks/layout.html' %}
+{% load static %}
+{% block content %}
+
+<section id="intro">
+   <article id="intro-header">
+      <div class="container">
+         <h1 class="my-2">Welcome to <span style="font-family: fantasy;">3Kei Poemz</span></h1>
+         <p class="lead">
+            <span style="font-family: fantasy;"> <b>3Kei Poemz</b> </span> is an undisputed home of the most amazing
+            african poets
+            and best african poetry.
+            We host poems of all categories with our greatest emphasis being on African poetry.
+         </p>
+         <p class="lead">
+            Our main goal is to bring poetry closer to everyone and make it easy for all to catch up with their favorite
+            poets
+            anytime, anywhere.
+         </p>
+      </div>
+   </article>
+</section>
+
+{% if poems_list %}
+<section class="container">
+   <div class="row">
+
+      <div class="col-md-8">
+
+         <article class="my-3">
+            <h3 class="text-uppercase text-center">Latest Poems</h3>
+         </article>
+
+         {% for poem in poems_list %}
+
+
+         <section class="poem-section">
+            <a href="{% url 'user-poems' poem.author.username %}">
+               <section id="poet">
+                  <article class="avatar">
+                     <img src="{{ poem.author.profile.image.url }}" alt="Profile Photo" class="rounded-circle"
+                        width="100px">
+                  </article>
+                  <article class="poet-info">
+
+                     <h4>{{poem.author.first_name}} {{poem.author.last_name}}</h4>
+                     <span class="text-lowercase">
+                        @{{poem.author.username}}
+                     </span>
+
+                     <p>{{poem.date_created}}</p>
+                  </article>
+               </section>
+            </a>
+            <legend class="border-top mb-2" style="width: 80%;"></legend>
+            <article id="poem"></article>
+            <a href="{% url 'detail' poem.id %}">
+               <h3 class="my-2">
+                  {{ poem.title }}
+               </h3>
+            </a>
+            <p>
+               {{poem.description}}
+            </p>
+         </section>
+
+         {% endfor %}
+
+         <div id="paginate">
+            {% if is_paginated %}
+
+
+            {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{page_obj.previous_page_number}}">Prev</a>
+            {% endif %}
+
+
+            {% for num in page_obj.paginator.page_range %}
+
+            {% if page_obj.number == num %}
+            <a class="btn btn-info mb-4" href="?page={{ num }}">{{num}}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a
+               class="btn btn-outline-info mb-4" href="?page={{num}}">
+               {{num}}
+               </a>
+               {% endif %}
+
+               {% endfor %}
+
+               {% if page_obj.has_next %}
+               <a class="btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}}">Next</a>
+               <a class="btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages }}">Last</a>
+               {% endif %}
+
+               {% endif %}
+
+         </div>
+      </div>
+      <div class="col-md-4">
+         <h3 class="text-center my-3">3Kei Poems by Category</h3>
+
+         {% for poem in poems_list %}
+         <p>{{poem.title}}</p>
+         {% endfor %}
+
+      </div>
+   </div>
+   </div>
+
+   {% else %}
+   <div>
+      <article class="poem-section text-center my-2">
+         <p class="lead">
+            There are no poems posted at the moment.
+         </p>
+         <p class="text-muted">
+            Please check back later or try reloading the page!
+         </p>
+      </article>
+   </div>
+   {% endif %}
+
+   {% endblock content %}
